@@ -24,11 +24,36 @@ const truthValuesOf = function (numbers) {
   return numbers.map((number) => number !== 0);
 };
 
+const stringReverse = function (string) {
+  let reversedString = "";
+
+  for (const char of string) {
+    reversedString = char + reversedString;
+  }
+
+  return reversedString;
+};
+
 // reverse strings of ["hello", "world"] => ["olleh", "dlrow"]
-const reversedStringsOf = function (strings) { };
+
+const reversedStringsOf = function (strings) {
+  return strings.map(stringReverse);
+};
+
+const repeatAllLetter = function (string) {
+  let repeatedString = "";
+
+  for (const char of string) {
+    repeatedString += char + char;
+  }
+
+  return repeatedString;
+};
 
 // double letters of ["cat", "dog", "bat"] => ["ccaat", "ddoog", "bbaatt"]
-const doubleLettersOf = function (strings) { };
+const doubleLettersOf = function (strings) {
+  return strings.map(repeatAllLetter);
+};
 
 // boolean negation of [true, false, true] => [false, true, false]
 const negatedBooleansOf = function (booleans) { };
