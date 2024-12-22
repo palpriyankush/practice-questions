@@ -121,10 +121,28 @@ const withoutVowelsOf = function (strings) {
 
 // cumulative sums of [[1, 2, 3], [4, 5, 6]] => [[1, 3, 6], [4, 9, 15]]
 // Example: cumulative sum of [1, 2, 3] is [1, 1+2, 1+2+3]
-const cumulativeSumsOf = function (arrays) { };
+const getRunningTotal = function (initial, number) {
+  initial.push(initial.length === 0 ? number : initial.at(-1) + number);
+
+  return initial;
+};
+
+const getCumulativeSum = function (numbers) {
+  return numbers.reduce(getRunningTotal, []);
+};
+
+const cumulativeSumsOf = function (arrays) {
+  return arrays.map(getCumulativeSum);
+};
 
 // reverse words in ["hello world", "goodbye moon"] => ["olleh dlrow", "eybdoog noom"]
-const reversedWordsOf = function (strings) { };
+
+const getReversedWord = function (words) {
+  return words.split(" ").map(stringReverse).join(" ");
+};
+const reversedWordsOf = function (strings) {
+  return strings.map(getReversedWord);
+};
 
 // extract unique characters from ["apple", "banana", "grape"] => ["apl", "ban", "gra"]
 // Maintain the order of their first appearance in each string
