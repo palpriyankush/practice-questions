@@ -1,3 +1,15 @@
+const vowels = "aeiouAEIOU";
+
+const invert = function (f) {
+  return function (...args) {
+    return !f(...args);
+  };
+};
+
+const isVowel = function (char) {
+  return vowels.includes(char);
+};
+
 // squares of [1, 2, 3] => [1, 4, 9]
 const squaresOf = function (numbers) {
   return numbers.map((num) => Math.pow(num, 2));
@@ -56,9 +68,9 @@ const charCodesOf = function (strings) {
 // extract domain names from ["user1@gmail.com", "admin@yahoo.com"] => ["gmail.com", "yahoo.com"]
 
 const getDomain = function (email) {
-  const startingRange = [...email].indexOf("@") + 1;
+  const startingRange = email.indexOf("@") + 1;
 
-  return email.slice(startingRange, email.length);
+  return email.slice(startingRange);
 };
 
 const domainNamesOf = function (emails) {
@@ -84,7 +96,7 @@ const repeatedStringsOf = function (strings) {
 // count vowels in ["apple", "banana", "grape"] => [2, 3, 2]
 
 const countIfVowels = function (count, char) {
-  return count + "aeiou".includes(char) ? 1 : 0;
+  return count + isVowel(char);
 };
 
 const countVowels = function (string) {
@@ -97,22 +109,16 @@ const countVowelsOf = function (strings) {
 
 // reverse arrays of [[1, 2, 3], [4, 5, 6]] => [[3, 2, 1], [6, 5, 4]]
 
-const getReverse = function (array) {
-  return array.reverse();
-};
-
 const reversedArraysOf = function (arrays) {
-  return arrays.map(getReverse);
+  return arrays.map(function (array) {
+    return array.reverse();
+  });
 };
 
 // remove vowels from ["apple", "banana", "grape"] => ["ppl", "bnn", "grp"]
 
-const isConsonent = function (char) {
-  return !"aeiou".includes(char);
-};
-
 const getWordWithOutVowel = function (word) {
-  return [...word].filter(isConsonent).join("");
+  return [...word].filter(invert(isVowel)).join("");
 };
 
 const withoutVowelsOf = function (strings) {
@@ -122,13 +128,13 @@ const withoutVowelsOf = function (strings) {
 // cumulative sums of [[1, 2, 3], [4, 5, 6]] => [[1, 3, 6], [4, 9, 15]]
 // Example: cumulative sum of [1, 2, 3] is [1, 1+2, 1+2+3]
 const getRunningTotal = function (initial, number) {
-  initial.push(initial.length === 0 ? number : initial.at(-1) + number);
+  const currentSum = initial.at(-1) + number;
 
-  return initial;
+  return [...initial, currentSum];
 };
 
-const getCumulativeSum = function (numbers) {
-  return numbers.reduce(getRunningTotal, []);
+const getCumulativeSum = function ([first, ...restNumbers]) {
+  return restNumbers.reduce(getRunningTotal, [first]);
 };
 
 const cumulativeSumsOf = function (arrays) {
