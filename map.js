@@ -1,14 +1,20 @@
 const vowels = "aeiouAEIOU";
 
+// frequently used function
 const invert = function (f) {
   return function (...args) {
     return !f(...args);
   };
 };
 
+const stringReverse = function (string) {
+  return [...string].reverse().join("");
+};
+
 const isVowel = function (char) {
   return vowels.includes(char);
 };
+// end of frequently used function
 
 // squares of [1, 2, 3] => [1, 4, 9]
 const squaresOf = function (numbers) {
@@ -36,10 +42,6 @@ const truthValuesOf = function (numbers) {
   return numbers.map((number) => number !== 0);
 };
 // reverse strings of ["hello", "world"] => ["olleh", "dlrow"]
-
-const stringReverse = function (string) {
-  return [...string].reverse().join("");
-};
 
 const reversedStringsOf = function (strings) {
   return strings.map(stringReverse);
