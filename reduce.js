@@ -123,7 +123,17 @@ const invertObject = function (obj) { };
 const mergeArrays = function (arr1, arr2) { };
 
 // groupByProperty([{name: "John", age: 25}, {name: "Jane", age: 30}]) => { 25: [{name: "John", age: 25}], 30: [{name: "Jane", age: 30}] }
-const groupByProperty = function (objects) { };
+
+const addIndividualByProperty = (storer, eachPerson) => {
+  storer[eachPerson.age] = [eachPerson];
+
+  return storer;
+};
+const groupByProperty = function (objects) {
+  return objects.reduce(addIndividualByProperty, {});
+};
+
+console.log(groupByProperty([{ name: "John", age: 25 }, { name: "Jane", age: 30 }]));
 
 // ascendingGroups([1,2,3,4,3,4,5,10,6,7,8,9]) => [[1,2,3,4],[3,4,5],[10],[6,7,8,9]]
 const ascendingGroups = function (numbers) { };
